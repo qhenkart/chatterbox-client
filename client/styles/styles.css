@@ -69,6 +69,9 @@ form input[type=text] {
 #chats .username {
     font-weight: 800;
 }
+#chats .username:hover {
+cursor: crosshair;
+}
 
 #chats:hover {
     background-color: #ddd;
@@ -88,3 +91,6 @@ form input[type=text] {
     visibility:hidden;
 }
 
+.friend{
+    font-weight: bold;
+}

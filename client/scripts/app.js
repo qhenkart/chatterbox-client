@@ -3,6 +3,7 @@ var app = {
   server: "https://api.parse.com/1/classes/chatterbox",
   currentRoom: 'lobby',
   rooms: {},
+  friends: {},
 
   init: function(){
       app.fetch();
@@ -52,8 +53,15 @@ var app = {
       if(/<script>/.test(message.text)){
         message.text = "GTFO Hacker!!!"
       }
+      if (message.username in app.friends){
+        var $message = '<p><span class="username">'+message.username+
+                      '</span><span class="friend">: '+message.text+'</span></p>';
 
-      var $message = '<p>'+message.username+': '+message.text+'</p>';
+      }else{
+        var $message = '<p><span class="username">'+message.username+
+                        '</span><span>: '+message.text+'</span></p>';
+
+      }
       $('#chats').append($message);
     }
   },
@@ -92,6 +100,20 @@ var app = {
         $('#chatrooms').append($option);
       }
     });
+  },
+
+  addRoom: function(room){
+    app.currentRoom = room;
+    var $option = '<option selected="selected">'+app.currentRoom+'</option>';
+    $('#chatrooms').append($option);
+    app.fetch();
+  },
+
+  addFriend: function(){
+
+  },
+  handleSubmit: function(){
+
   }
 }
 
@@ -109,14 +131,16 @@ $(document).ready(function(){
 
 
 //checks for sent message
-  $('#submit').on('click', function(event) {
+  $('.submit').on('click', function(event) {
     event.preventDefault();
     var message = {
       'username': window.location.search.split('=')[1],
       'text': $('#chatbox').val(),
       'roomname': app.currentRoom
     };
+    app.handleSubmit();
     app.send(message);
+
 
     $('#chatbox').val('');
   });
@@ -133,13 +157,18 @@ $('#createroom').on('click', function(event){
 });
 
 $("#chatroomsubmit").on('click', function(e){
-  app.currentRoom = $('#chatroombox').val();
+  event.preventDefault();
+  $(".chatroom").toggleClass("hidden")
+  app.addRoom($('#chatroombox').val());
+});
+
+$("#chats").on('click','.username', function(e){
+  app.friends[$(this).text()] = $(this).text()
+  app.addFriend();
   app.fetch();
 });
 
 
-  //getMessages();
-  // populateRooms();
    setInterval(app.fetch, 15000);
 
 });
