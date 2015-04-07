@@ -60,17 +60,17 @@ form input[type=text] {
     padding: 5px;
 }
 
-.chat {
+#chats {
     padding: 5px;
     margin-bottom: 5px;
     background-color: #eee;
 }
 
-.chat .username {
+#chats .username {
     font-weight: 800;
 }
 
-.chat:hover {
+#chats:hover {
     background-color: #ddd;
 }
 
@@ -84,6 +84,7 @@ form input[type=text] {
     padding: 10px;
 }
 
-#usernameset {
-    display:hidden;
+.hidden {
+    visibility:hidden;
 }
+

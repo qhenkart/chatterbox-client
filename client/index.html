@@ -15,7 +15,14 @@
   <body>
     <div id="main">
       <h1>chatterbox</h1>
-      <button>Change Room</button>
+      <form class='chatroom hidden'>
+        <input type="text" placeholder='Message here!' id="chatroombox" autofocus />
+        <input type="submit" value="Submit" id="chatroomsubmit">
+      </form>
+      <button id="createroom">Create Room</button>
+      <select id="chatrooms">
+        <option selected="selected">lobby</option>
+      </select>
       <!--<form id="usernameset">
         <input type="text" placeholder='Message here!' id="chatbox" autofocus />
         <input type="submit" value="Submit" id="submit">
@@ -25,7 +32,7 @@
         <input type="submit" value="Submit" id="submit">
       </form>
       <!-- Your HTML goes here! -->
-      <div class="chat"></div>
+      <div id="chats"></div>
     </div>
   </body>
 </html>
