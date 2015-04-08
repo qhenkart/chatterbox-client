@@ -34,7 +34,7 @@ var app = {
       url: 'https://api.parse.com/1/classes/chatterbox',
       type: 'GET',
       contentType: 'application/json',
-      data:{order:'-createdAt', limit:20, where:'{"roomname":"'+app.currentRoom+'"}'},
+      data:{order:'-createdAt', limit:10, where:'{"roomname":"'+app.currentRoom+'"}'},
       success: function (data) {
         $("#chats").html('');
         _.each(data.results, function(obj){
@@ -54,12 +54,12 @@ var app = {
         message.text = "GTFO Hacker!!!"
       }
       if (message.username in app.friends){
-        var $message = '<p><span class="username">'+message.username+
-                      '</span><span class="friend">: '+message.text+'</span></p>';
+        var $message = '<div class="username">'+message.username+
+                      '</div><p class="text friend"> '+message.text+'</p><div class="line-separator"></div>';
 
       }else{
-        var $message = '<p><span class="username">'+message.username+
-                        '</span><span>: '+message.text+'</span></p>';
+        var $message = '<p class="username">'+message.username+
+                      '</p><p class="text"> '+message.text+'</p><div class="line-separator"></div>';
 
       }
       $('#chats').append($message);
